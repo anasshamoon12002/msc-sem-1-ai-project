@@ -18,3 +18,10 @@ class TTT:
                 print(self.board[i][j] + " | ", end="")
             print()
             print("--------------------")
+
+    def set_player(self, count):
+        pass
+
+    def get_player_mark(self):
+        pass
+
