@@ -36,7 +36,10 @@ class TTT:
         return False
 
     def check_columns(self):
-        pass
+        for i in range(len(self.board)):
+            if self.check_row_and_col(self.board[0][i], self.board[1][i], self.board[2][i]):
+                return True
+        return False
 
     def check_diagonals(self):
         pass
