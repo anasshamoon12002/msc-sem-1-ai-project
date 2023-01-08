@@ -27,7 +27,7 @@ class TTT:
 
     # Checks if there is a winner based upon the rules of tic tac toe
     def check_winner(self):
-        pass
+        return self.check_rows() or self.check_diagonals() or self.check_columns()
 
     def check_rows(self):
         for i in range(len(self.board)):
