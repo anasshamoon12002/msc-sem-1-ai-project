@@ -2,8 +2,9 @@ class TTT:
     def __init__(self):
         self.board = [["" for j in range (3)] for i in range(3)]
         self.player_mark = ""
+        self.initialize_board()
 
-    def initialize_bord(self):
+    def initialize_board(self):
        for i in range(len(self.board)):
           for j in range(len(self.board[i])):
 
