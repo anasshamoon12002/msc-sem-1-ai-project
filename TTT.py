@@ -31,7 +31,7 @@ class TTT:
 
     def check_rows(self):
         for i in range(len(self.board)):
-            if self.check_row_and_col(self.board[0][i], self.board[1][i], self.board[2][i]):
+            if self.check_row_and_col(self.board[i][0], self.board[i][1], self.board[i][2]):
                 return True
         return False
 
