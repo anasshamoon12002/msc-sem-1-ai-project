@@ -42,7 +42,9 @@ class TTT:
         return False
 
     def check_diagonals(self):
-        pass
+        first_diagonal = self.check_row_and_col(self.board[0][0], self.board[1][1], self.board[2][2])
+        second_diagonal = self.check_row_and_col(self.board[0][2], self.board[1][1], self.board[2][0])
+        return first_diagonal or second_diagonal
 
     # Checks if the values are same and are not empty. Used in checking the rows, columns and diagonals for the winner
     def check_row_and_col(self, val_1, val_2, val_3):
