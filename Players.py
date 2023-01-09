@@ -12,7 +12,7 @@ class Players:
         while True:
             print("\nCurrent Game")
             if count % 2 == 0:
-                print("\nplayer 1: X")
+                print("\nPlayer 1: X")
             else:
                 print("\nPlayer 2: O")
             game.set_player(count)
@@ -27,14 +27,16 @@ class Players:
                     print("\nWrong Input!!!Try again!!! \n")
             if game.check_winner():
                 print()
-            if count % 2 == 0:
-                print("\nPlayer 1 (X) is the winner!!!\n")
-            else:
-                print("\nPlayer 2 (O) is the winner!!!\n")
-            break
-        count += 1
+                game.display_board()
+                if count % 2 == 0:
+                    print("\nPlayer 1 (X) is the winner!!!\n")
+                else:
+                    print("\nPlayer 2 (O) is the winner!!!\n")
+                break
+            count += 1
 
         if game.board_check() and not game.check_winner():
+            game.display_board()
             print("\nThis game is a tie!\n")
 
 
