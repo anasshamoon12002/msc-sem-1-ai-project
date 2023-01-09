@@ -12,8 +12,11 @@ class Players:
         while True:
             print("\nCurrent Game")
             if count % 2 == 0:
-                print("\nplayer 1: x")
+                print("\nplayer 1: X")
+            else:
+                print("\nPlayer 2: O")
             game.set_player(count)
+            game.display_board()
             while True:
                 self.row = int(input("Enter number of row: "))
                 self.column = int(input("Enter number of column: "))
@@ -25,11 +28,14 @@ class Players:
             if game.check_winner():
                 print()
             if count % 2 == 0:
-                print("\nPlayer 1 (x) is the winner!!!\n")
+                print("\nPlayer 1 (X) is the winner!!!\n")
             else:
-                print("\nPlayer 2 (o) is the winner!!!\n")
+                print("\nPlayer 2 (O) is the winner!!!\n")
             break
         count += 1
+
+        if game.board_check() and not game.check_winner():
+            print("\nThis game is a tie!\n")
 
 
 
