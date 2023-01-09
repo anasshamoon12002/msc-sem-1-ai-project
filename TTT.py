@@ -26,7 +26,7 @@ class TTT:
             self.player_mark = "  O  "
 
     def get_player_mark(self):
-        pass
+        return self.player_mark
 
     # Checks if there is a winner based upon the rules of tic tac toe
     def check_winner(self):
