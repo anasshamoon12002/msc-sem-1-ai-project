@@ -20,7 +20,10 @@ class TTT:
             print("--------------------")
 
     def set_player(self, count):
-        pass
+        if count % 2 == 0:
+            self.player_mark = "  X  "
+        else:
+            self.player_mark = "  O  "
 
     def get_player_mark(self):
         pass
