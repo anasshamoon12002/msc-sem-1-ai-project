@@ -50,12 +50,15 @@ class Players:
         count_computer = turn
 
         game = TTT()
-        game.set_player(count_computer)
-        game.display_board()
 
         while True:
 
+            if game.board_check():
+                break
+
             print("\nCurrent Game")
+            game.set_player(count_computer)
+            game.display_board()
 
             if count_computer % 2 == 0:
                 print("\nYou: X")
@@ -92,6 +95,7 @@ class Players:
             count_computer += 1
 
         if game.board_check() and not game.check_winner():
+            game.display_board()
             print("\nThis game is a tie!\n")
 
 
