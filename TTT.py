@@ -21,9 +21,9 @@ class TTT:
 
     def set_player(self, count):
         if count % 2 == 0:
-            self.player_mark = "  X  "
+            self.player_mark = " X "
         else:
-            self.player_mark = "  O  "
+            self.player_mark = " O "
 
     def get_player_mark(self):
         return self.player_mark
