@@ -61,3 +61,14 @@ class TTT:
             if self.board[rows - 1][columns - 1] == "   ":
                 self.board[rows - 1][columns - 1] = self.get_player_mark()
 
+    def board_check(self):
+        is_full = True
+
+        for i in range(len(self.board)):
+            for j in range(len(self.board)):
+                if self.board[i][j] == "   ":
+                    is_full = False
+                    break
+
+        return is_full
+
