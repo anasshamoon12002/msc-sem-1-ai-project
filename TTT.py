@@ -53,4 +53,6 @@ class TTT:
     def check_row_and_col(self, val_1, val_2, val_3):
         return val_1 != "   " and val_1 == val_2 and val_2 == val_3
 
+    def value_check(self, row, column):
+        return self.board[row-1][column-1] == "   "
 
