@@ -84,7 +84,7 @@ class Players:
 
             count_computer += 1
 
-        if game.board_check() and game.check_winner():
+        if game.board_check() and not game.check_winner():
             print("\nThis game is a tie!\n")
 
 
