@@ -56,3 +56,8 @@ class TTT:
     def value_check(self, row, column):
         return self.board[row-1][column-1] == "   "
 
+    def modify_board(self, rows, columns):
+        if rows > 0 and rows < 4 and columns < 4 and columns > 0:
+            if self.board[rows - 1][columns - 1] == "   ":
+                self.board[rows - 1][columns - 1] = self.get_player_mark()
+
