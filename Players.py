@@ -10,6 +10,9 @@ class Players:
         count = num
         game = TTT()
         while True:
+            if game.board_check():
+                break
+
             print("\nCurrent Game")
             if count % 2 == 0:
                 print("\nPlayer 1: X")
@@ -34,6 +37,8 @@ class Players:
                     print("\nPlayer 2 (O) is the winner!!!\n")
                 break
             count += 1
+
+        print(game.board_check(), game.check_winner())
 
         if game.board_check() and not game.check_winner():
             game.display_board()
