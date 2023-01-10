@@ -144,6 +144,108 @@ class Players:
             print("\nThis game is a tie!\n")
 
 
+    def evaluate(self, b, player, opponent):
+
+        #checking for row for X or O victory.
+        for row in range(3):
+            if(b[row][0] == b[row][1] and b[row][1] == b[row][2]):
+                if (b[row][0] == player):
+                    return 10
+                elif (b[row][0] == opponent):
+                    return -10
+
+        #checking for columns for X or O victory.
+        for col in range(3):
+            if (b[0][col] == b[1][col] and b[1][col] == b[2][col]):
+                if (b[0][col] == player):
+                    return 10
+                elif (b[0][col]== opponent):
+                    return -10
+        #checking for Diagonals for X or O victory.
+        if (b[0][0] == b[1][1] and b[1][1] == b[2][2]):
+
+            if (b[0][0] == player):
+                return 10
+            elif (b[0][0] == opponent):
+                return -10
+
+        if (b[0][2] == b[1][1] and b[1][1] == b[2][0]):
+
+              if (b[0][2] == player):
+                  return 10
+              elif (b[0][2] == opponent):
+                  return -10
+        #Else isMovesLeft(self, board):
+        return 0
+    
+    def isMovesLeft(self, board):
+        for i in range(3):
+            for J in range(3):
+                if (board[i][j] == '   '):
+                    return True
+        return False
+
+    def minimax(self, board, depth, isMax, player, opponent):
+        score = self.evaluate(board, player, opponent)
+
+        #if Maximizer has won the game return his\her
+        #evaluated score
+        if (score == 10):
+            return score
+
+        #if Minimizer has won the game return his\her
+        #evaluated score
+        if (score == -10):
+            return score
+        #if there are no more moves and no winner then
+        #it is a tie
+        if (self.isMovesLeft(board) == False):
+            return 0
+        #if this maximizer's move
+        if (isMax):
+            best = -1000
+
+            #traverse all cells
+            for i in range(3):
+                for J in range(3):
+
+                    #check if cell is empty
+                     if (board[i][j] == '   '):
+                         #Make the move
+                         board[i][j] = player
+
+                         #call minimax recursively and choose
+                         #the maximum value
+                         best = max(best, self.minimax(board, depth + 1, not isMax, player, opponent))
+                         #Undo the move
+                         board[i][j] = '   '
+            return best
+        #if this minimizer's move
+        else:
+            best = 1000
+            #Traverse all cells
+            for i in range(3):
+                for j in range(3):
+
+                    #Check if cell is empty
+                    if (board[i][j] == '   '):
+                         #Make the move
+                         board[i][j] = opponent
+
+                         #call minimax recursively and choose
+                         #the minimum value
+                         best = min(best, self.minimax(board, depth + 1, not isMax, player, opponent))
+
+                         #undo the move
+                         board[i][j] = '   '
+            return best
+
+
+
+
+
+
+
 
 
 
