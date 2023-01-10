@@ -10,8 +10,15 @@ def test_computer(turn):
     play = Players()
     play.random_computer(turn)
 
+
+def ai_computer(turn):
+    play = Players()
+    play.AI_computer(turn)
+
 # test_multiplayer()
 
 # test_computer(0)
 
-test_computer(1)
+# test_computer(1)
+
+ai_computer(1)
