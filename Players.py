@@ -99,5 +99,51 @@ class Players:
             print("\nThis game is a tie!\n")
 
 
-    def AI_computer(self):
-        pass
+    def AI_computer(self, turn):
+        count_computer = turn
+        game = TTT()
+
+        while True:
+            if game.board_check():
+                break
+
+            print("\nCurrent Game")
+            game.set_player(count_computer)
+            game.display_board()
+
+            if count_computer % 2 == 0:
+                print("\nYou: X")
+                while True:
+                    self.row = int(input("Enter number of row: "))
+                    self.column = int(input("Enter number of column: "))
+
+                    if game.value_check(self.row, self.column) and self.row > 0 and self.row < 4 and self.column > 0 and self.column < 4:
+                        game.modify_board(self.row, self.column)
+                        break
+                    else:
+                        print("\nWrong input!!! Try again!\n")
+            else:
+                print("\nComputer: O")
+
+                # minimax algorithm
+
+            if game.check_winner():
+                print()
+                game.display_board()
+                if count_computer % 2 == 0:
+                    print("\nYou (X) are the winner!!")
+                else:
+                    print("\nComputer (O) is the winner!!")
+
+                break
+
+            count_computer += 1
+
+        if game.board_check() and not game.check_winner():
+            game.display_board()
+            print("\nThis game is a tie!\n")
+
+
+
+
+
