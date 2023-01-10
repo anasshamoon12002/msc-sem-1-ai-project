@@ -119,6 +119,7 @@ class Players:
 
                     if game.value_check(self.row, self.column) and self.row > 0 and self.row < 4 and self.column > 0 and self.column < 4:
                         game.modify_board(self.row, self.column)
+                        print(game.board[self.row - 1][self.column - 1])
                         break
                     else:
                         print("\nWrong input!!! Try again!\n")
@@ -126,6 +127,10 @@ class Players:
                 print("\nComputer: O")
 
                 # minimax algorithm
+                best_move = self.find_best_move(game.board, " O ", " X ")
+                print("Best move: ", best_move)
+                game.modify_board(best_move[0] + 1, best_move[1] + 1)
+                print(game.board[best_move[0]][best_move[1]])
 
             if game.check_winner():
                 print()
@@ -144,49 +149,49 @@ class Players:
             print("\nThis game is a tie!\n")
 
 
-    def evaluate(self, b, player, opponent):
+    def evaluate(self, board, computer, opponent):
 
         #checking for row for X or O victory.
         for row in range(3):
-            if(b[row][0] == b[row][1] and b[row][1] == b[row][2]):
-                if (b[row][0] == player):
+            if board[row][0] == board[row][1] and board[row][1] == board[row][2]:
+                if board[row][0] == computer:
                     return 10
-                elif (b[row][0] == opponent):
+                elif board[row][0] == opponent:
                     return -10
 
         #checking for columns for X or O victory.
         for col in range(3):
-            if (b[0][col] == b[1][col] and b[1][col] == b[2][col]):
-                if (b[0][col] == player):
+            if board[0][col] == board[1][col] and board[1][col] == board[2][col]:
+                if board[0][col] == computer:
                     return 10
-                elif (b[0][col]== opponent):
+                elif board[0][col] == opponent:
                     return -10
         #checking for Diagonals for X or O victory.
-        if (b[0][0] == b[1][1] and b[1][1] == b[2][2]):
+        if board[0][0] == board[1][1] and board[1][1] == board[2][2]:
 
-            if (b[0][0] == player):
+            if board[0][0] == computer:
                 return 10
-            elif (b[0][0] == opponent):
+            elif board[0][0] == opponent:
                 return -10
 
-        if (b[0][2] == b[1][1] and b[1][1] == b[2][0]):
+        if board[0][2] == board[1][1] and board[1][1] == board[2][0]:
 
-              if (b[0][2] == player):
+              if board[0][2] == computer:
                   return 10
-              elif (b[0][2] == opponent):
+              elif board[0][2] == opponent:
                   return -10
         #Else isMovesLeft(self, board):
         return 0
     
-    def isMovesLeft(self, board):
+    def is_moves_left(self, board):
         for i in range(3):
-            for J in range(3):
+            for j in range(3):
                 if (board[i][j] == '   '):
                     return True
         return False
 
-    def minimax(self, board, depth, isMax, player, opponent):
-        score = self.evaluate(board, player, opponent)
+    def minimax(self, board, depth, is_max, computer, opponent):
+        score = self.evaluate(board, computer, opponent)
 
         #if Maximizer has won the game return his\her
         #evaluated score
@@ -199,24 +204,24 @@ class Players:
             return score
         #if there are no more moves and no winner then
         #it is a tie
-        if (self.isMovesLeft(board) == False):
+        if (self.is_moves_left(board) == False):
             return 0
         #if this maximizer's move
-        if (isMax):
+        if (is_max):
             best = -1000
 
             #traverse all cells
             for i in range(3):
-                for J in range(3):
+                for j in range(3):
 
                     #check if cell is empty
                      if (board[i][j] == '   '):
                          #Make the move
-                         board[i][j] = player
+                         board[i][j] = computer
 
                          #call minimax recursively and choose
                          #the maximum value
-                         best = max(best, self.minimax(board, depth + 1, not isMax, player, opponent))
+                         best = max(best, self.minimax(board, depth + 1, not is_max, computer, opponent))
                          #Undo the move
                          board[i][j] = '   '
             return best
@@ -234,18 +239,30 @@ class Players:
 
                          #call minimax recursively and choose
                          #the minimum value
-                         best = min(best, self.minimax(board, depth + 1, not isMax, player, opponent))
+                         best = min(best, self.minimax(board, depth + 1, not is_max, computer, opponent))
 
                          #undo the move
                          board[i][j] = '   '
             return best
 
+    def find_best_move(self, board, computer, opponent):
+        best_val = -1000
+        best_move = (-1, -1)
 
+        for i in range(3):
+            for j in range(3):
+                if board[i][j] == "   ":
+                    board[i][j] = computer
 
+                    move_val = self.minimax(board, 0, False, computer, opponent)
 
+                    board[i][j] = "   "
 
+                    if move_val > best_val:
+                        best_move = (i, j)
+                        best_val = move_val
 
+        print("The value of the best move is: ", best_move)
+        print()
 
-
-
-
+        return best_move
