@@ -23,7 +23,8 @@ class Players:
             while True:
                 self.row = int(input("Enter number of row: "))
                 self.column = int(input("Enter number of column: "))
-                if game.value_check(self.row, self.column) and self.row > 0 and self.row < 4 and self.column > 0 and self.column < 4:
+                if self.row > 0 and self.row < 4 and self.column > 0 and self.column < 4\
+                        and game.value_check(self.row, self.column):
                     game.modify_board(self.row, self.column)
                     break
                 else:
@@ -65,8 +66,8 @@ class Players:
                 while True:
                     self.row = int(input("Enter number of row: "))
                     self.column = int(input("Enter number of column: "))
-                    if game.value_check(self.row, self.column) and self.row > 0 and \
-                            self.row < 4 and self.column > 0 and self.column < 4:
+                    if self.row > 0 and self.row < 4 and self.column > 0 and self.column < 4\
+                            and game.value_check(self.row, self.column):
                         game.modify_board(self.row, self.column)
                         break
                     else:
@@ -118,7 +119,8 @@ class Players:
                     self.row = int(input("Enter number of row: "))
                     self.column = int(input("Enter number of column: "))
 
-                    if game.value_check(self.row, self.column) and self.row > 0 and self.row < 4 and self.column > 0 and self.column < 4:
+                    if self.row > 0 and self.row < 4 and self.column > 0 and self.column < 4 \
+                            and game.value_check(self.row, self.column):
                         game.modify_board(self.row, self.column)
                         print(game.board[self.row - 1][self.column - 1])
                         break
