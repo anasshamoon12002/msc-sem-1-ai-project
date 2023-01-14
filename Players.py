@@ -62,14 +62,15 @@ class Players:
 
             if count_computer % 2 == 0:
                 print("\nYou: X")
-                self.row = int(input("Enter number of row: "))
-                self.column = int(input("Enter number of column: "))
-                if self.row > 0 and self.row < 4 and self.column > 0 and self.column < 4 and game.value_check(self.row,
-                                                                                                              self.column):
-                    game.modify_board(self.row, self.column)
-
-                else:
-                    print("\nWrong Input!!! Try again!!! \n")
+                while True:
+                    self.row = int(input("Enter number of row: "))
+                    self.column = int(input("Enter number of column: "))
+                    if game.value_check(self.row, self.column) and self.row > 0 and \
+                            self.row < 4 and self.column > 0 and self.column < 4:
+                        game.modify_board(self.row, self.column)
+                        break
+                    else:
+                        print("\nWrong Input!!!Try again!!! \n")
 
             else:
                 print("\nComputer: 0")
