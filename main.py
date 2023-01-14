@@ -58,4 +58,4 @@ while True:
         if continue_status == 2:
             break
 
-    print('\nBye Bye!!! \n')
+print('\nBye Bye!!! \n')
