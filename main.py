@@ -29,16 +29,29 @@ print("\nTic Tac Toe")
 print("\nSCALE \nRows:     1 - 3 \nColumns:  1 - 3")
 
 while True:
-    print("\nSelect one option:")
-    print("1. Multiplayer   2. Computer (Random Values)   3. Computer (AI)")
-    choice = int(input())
+    while True:
+        try:
+            print("\nSelect one option:")
+            print("1. Multiplayer   2. Computer (Random Values)   3. Computer (AI)")
+            choice = int(input())
+            break
+        except:
+            print("\nWrong or Invalid Input!!! Please try again.")
+            # continue
+
 
     if choice == 1:
         play.multiplayer(0)
     elif choice == 2 or choice == 3:
-        print("\nWho should play first?")
-        print("1. Player   2. Computer")
-        turn = int(input())
+        while True:
+            try:
+                print("\nWho should play first?")
+                print("1. Player   2. Computer")
+                turn = int(input())
+                break
+            except:
+                print("\nWrong or Invalid Input!!! Please try again.")
+
 
         if choice == 2:
             if turn == 1:
@@ -51,11 +64,9 @@ while True:
             else:
                 play.AI_computer(1)
 
-        print("Do you want to play again?")
-        print("1. Yes   2. No")
-        continue_status = int(input())
-
-        if continue_status == 2:
             break
+    else:
+        print("\nWrong Input!!! Please try again.")
+
 
 print('\nBye Bye!!! \n')
