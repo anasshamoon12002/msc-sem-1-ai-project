@@ -21,8 +21,13 @@ class Players:
             game.set_player(count)
             game.display_board()
             while True:
-                self.row = int(input("Enter number of row: "))
-                self.column = int(input("Enter number of column: "))
+                try:
+                    self.row = int(input("Enter number of row: "))
+                    self.column = int(input("Enter number of column: "))
+                except:
+                    print("\nWrong or Invalid Input!!! Please try again.\n")
+                    continue
+
                 if self.row > 0 and self.row < 4 and self.column > 0 and self.column < 4\
                         and game.value_check(self.row, self.column):
                     game.modify_board(self.row, self.column)
@@ -39,7 +44,7 @@ class Players:
                 break
             count += 1
 
-        print(game.board_check(), game.check_winner())
+        # print(game.board_check(), game.check_winner())
 
         if game.board_check() and not game.check_winner():
             game.display_board()
@@ -64,8 +69,13 @@ class Players:
             if count_computer % 2 == 0:
                 print("\nYou: X")
                 while True:
-                    self.row = int(input("Enter number of row: "))
-                    self.column = int(input("Enter number of column: "))
+                    try:
+                        self.row = int(input("Enter number of row: "))
+                        self.column = int(input("Enter number of column: "))
+                    except:
+                        print("\nWrong or Invalid Input!!! Please try again.\n")
+                        continue
+
                     if self.row > 0 and self.row < 4 and self.column > 0 and self.column < 4\
                             and game.value_check(self.row, self.column):
                         game.modify_board(self.row, self.column)
@@ -116,32 +126,38 @@ class Players:
             if count_computer % 2 == 0:
                 print("\nYou: X")
                 while True:
-                    self.row = int(input("Enter number of row: "))
-                    self.column = int(input("Enter number of column: "))
-
-                    if self.row > 0 and self.row < 4 and self.column > 0 and self.column < 4 \
-                            and game.value_check(self.row, self.column):
-                        game.modify_board(self.row, self.column)
-                        print(game.board[self.row - 1][self.column - 1])
+                    try:
+                        self.row = int(input("Enter number of row: "))
+                        self.column = int(input("Enter number of column: "))
                         break
-                    else:
-                        print("\nWrong input!!! Try again!\n")
+                    except:
+                        print("\nWrong or Invalid Input!!! Please try again.\n")
+                        # continue
+
+                if self.row > 0 and self.row < 4 and self.column > 0 and self.column < 4 \
+                        and game.value_check(self.row, self.column):
+                    game.modify_board(self.row, self.column)
+                    # print(game.board[self.row - 1][self.column - 1])
+                    # break
+                else:
+                    print("\nWrong input!!! Try again!\n")
+                    continue
             else:
                 print("\nComputer: O")
 
                 # minimax algorithm
                 best_move = self.find_best_move(game.board, " O ", " X ")
-                print("Best move: ", best_move)
+                # print("Best move: ", best_move)
                 game.modify_board(best_move[0] + 1, best_move[1] + 1)
-                print(game.board[best_move[0]][best_move[1]])
+                # print(game.board[best_move[0]][best_move[1]])
 
             if game.check_winner():
                 print()
                 game.display_board()
                 if count_computer % 2 == 0:
-                    print("\nYou (X) are the winner!!")
+                    print("\nYou (X) are the winner!!\n")
                 else:
-                    print("\nComputer (O) is the winner!!")
+                    print("\nComputer (O) is the winner!!\n")
 
                 break
 

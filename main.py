@@ -48,23 +48,42 @@ while True:
                 print("\nWho should play first?")
                 print("1. Player   2. Computer")
                 turn = int(input())
+                if not (turn == 1 or turn == 2):
+                    print("\nWrong or Invalid Input!!! Please try again.")
+                    continue
                 break
             except:
                 print("\nWrong or Invalid Input!!! Please try again.")
 
+        turn_num = 0 if turn == 1 else 1
 
         if choice == 2:
             if turn == 1:
-                play.random_computer(0)
+                play.random_computer(turn_num)
             else:
-                play.random_computer(1)
+                play.random_computer(turn_num)
         else:
             if turn == 1:
-                play.AI_computer(0)
+                play.AI_computer(turn_num)
             else:
-                play.AI_computer(1)
+                play.AI_computer(turn_num)
 
+        while True:
+            try:
+                print("Do you want to play again?")
+                print("1. Yes   2. No")
+                continue_status = int(input())
+                if not (continue_status == 1 or continue_status == 2):
+                    print("\nWrong or Invalid Input!!! Please try again.\n")
+                    continue
+                break
+            except:
+                print("\nWrong or Invalid Input!!! Please try again.\n")
+
+        if continue_status == 2:
             break
+
+
     else:
         print("\nWrong Input!!! Please try again.")
 
