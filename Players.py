@@ -209,7 +209,7 @@ class Players:
                     return True
         return False
 
-    def minimax(self, board, depth, is_max, computer, opponent):
+    def minimax(self, board, depth, is_max, computer, opponent, do_pruning=False, alpha=-1000, beta=1000):
         score = self.evaluate(board, computer, opponent)
 
         #if Maximizer has won the game return his\her
@@ -243,6 +243,11 @@ class Players:
                          best = max(best, self.minimax(board, depth + 1, not is_max, computer, opponent))
                          #Undo the move
                          board[i][j] = '   '
+
+                         if do_pruning:
+                             alpha = max(alpha, best)
+                             if alpha >= beta:
+                                 break
             return best
         #if this minimizer's move
         else:
@@ -262,6 +267,12 @@ class Players:
 
                          #undo the move
                          board[i][j] = '   '
+
+                         if do_pruning:
+                             beta = min(beta, best)
+
+                             if beta <= alpha:
+                                 break
             return best
 
     def find_best_move(self, board, computer, opponent):
@@ -281,7 +292,7 @@ class Players:
                         best_move = (i, j)
                         best_val = move_val
 
-        print("The value of the best move is: ", best_move)
+        # print("The value of the best move is: ", best_move)
         print()
 
         return best_move
