@@ -1,3 +1,5 @@
+# import time
+
 from TTT import TTT
 import random
 
@@ -111,7 +113,7 @@ class Players:
             print("\nThis game is a tie!\n")
 
 
-    def AI_computer(self, turn):
+    def AI_computer(self, turn, do_pruning=False):
         count_computer = turn
         game = TTT()
 
@@ -146,7 +148,14 @@ class Players:
                 print("\nComputer: O")
 
                 # minimax algorithm
-                best_move = self.find_best_move(game.board, " O ", " X ")
+                # start_time = time.process_time()
+                # t_1 = time.time()
+                best_move = self.find_best_move(game.board, " O ", " X ", do_pruning)
+                # t_2 = time.time()
+                # end_time = time.process_time()
+                # t_result = t_2 - t_1
+                # print("CPU Execution Time: ", end_time - start_time)
+                # print("Time Taken: ", t_result)
                 # print("Best move: ", best_move)
                 game.modify_board(best_move[0] + 1, best_move[1] + 1)
                 # print(game.board[best_move[0]][best_move[1]])
@@ -212,6 +221,8 @@ class Players:
     def minimax(self, board, depth, is_max, computer, opponent, do_pruning=False, alpha=-1000, beta=1000):
         score = self.evaluate(board, computer, opponent)
 
+        # print("Do pruning: ", do_pruning)
+
         #if Maximizer has won the game return his\her
         #evaluated score
         if (score == 10):
@@ -240,7 +251,7 @@ class Players:
 
                          #call minimax recursively and choose
                          #the maximum value
-                         best = max(best, self.minimax(board, depth + 1, not is_max, computer, opponent))
+                         best = max(best, self.minimax(board, depth + 1, not is_max, computer, opponent, do_pruning))
                          #Undo the move
                          board[i][j] = '   '
 
@@ -263,7 +274,7 @@ class Players:
 
                          #call minimax recursively and choose
                          #the minimum value
-                         best = min(best, self.minimax(board, depth + 1, not is_max, computer, opponent))
+                         best = min(best, self.minimax(board, depth + 1, not is_max, computer, opponent, do_pruning))
 
                          #undo the move
                          board[i][j] = '   '
@@ -275,7 +286,7 @@ class Players:
                                  break
             return best
 
-    def find_best_move(self, board, computer, opponent):
+    def find_best_move(self, board, computer, opponent, do_pruning=False):
         best_val = -1000
         best_move = (-1, -1)
 
@@ -284,7 +295,7 @@ class Players:
                 if board[i][j] == "   ":
                     board[i][j] = computer
 
-                    move_val = self.minimax(board, 0, False, computer, opponent)
+                    move_val = self.minimax(board, 0, False, computer, opponent, do_pruning)
 
                     board[i][j] = "   "
 

@@ -1,6 +1,5 @@
 
 from Players import Players
-
 # def test_multiplayer():
 #     play = Players()
 #     play.multiplayer(0)
@@ -64,9 +63,9 @@ while True:
                 play.random_computer(turn_num)
         else:
             if turn == 1:
-                play.AI_computer(turn_num)
+                play.AI_computer(turn_num, True)
             else:
-                play.AI_computer(turn_num)
+                play.AI_computer(turn_num, True)
 
         while True:
             try:
