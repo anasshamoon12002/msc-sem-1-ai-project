@@ -31,7 +31,7 @@ while True:
     while True:
         try:
             print("\nSelect one option:")
-            print("1. Multiplayer   2. Computer (Random Values)   3. Computer (AI)")
+            print("1. Multiplayer   2. Computer (Random Values)   3. Computer (Minimax)   4. Computer (Alpha-Beta Pruning)")
             choice = int(input())
             break
         except:
@@ -41,7 +41,7 @@ while True:
 
     if choice == 1:
         play.multiplayer(0)
-    elif choice == 2 or choice == 3:
+    elif choice == 2 or choice == 3 or choice == 4:
         while True:
             try:
                 print("\nWho should play first?")
@@ -61,6 +61,11 @@ while True:
                 play.random_computer(turn_num)
             else:
                 play.random_computer(turn_num)
+        elif choice == 2:
+            if turn == 1:
+                play.AI_computer(turn_num, False)
+            else:
+                play.AI_computer(turn_num, False)
         else:
             if turn == 1:
                 play.AI_computer(turn_num, True)
